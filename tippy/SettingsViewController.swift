@@ -12,6 +12,7 @@ let TIP_SETTING_DEFAULT_KEY = "TipSettingDefault"
 let TIP_SETTING_EXCELLENT_VALUE_KEY = "TipSettingExcellentValue"
 let TIP_SETTING_GOOD_VALUE_KEY = "TipSettingGoodValue"
 let TIP_SETTING_OKAY_VALUE_KEY = "TipSettingOkayValue"
+let TIP_SETTING_ROUNDING_ENABLED_KEY = "TipSettingRoundingEnabled"
 let TIP_SETTING_ROUNDING_METHOD_KEY = "TipSettingRoundingMethod"
 
 let MIN_TIP_PERCENTAGE = 0

@@ -32,6 +32,10 @@ class ViewController: UIViewController {
         loadSettings()
         calculateTip(billValue: (Double(billField.text!) ?? 0))
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        saveSettings()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -49,6 +53,15 @@ class ViewController: UIViewController {
         
         // 0 is default which is what is returned when not found
         roundingMethod = defaults.integer(forKey: TIP_SETTING_ROUNDING_METHOD_KEY)
+        
+        // No is default which is desired default
+        roundSwitch.setOn(defaults.bool(forKey: TIP_SETTING_ROUNDING_ENABLED_KEY), animated: false)
+    }
+    
+    func saveSettings() {
+        let defaults = UserDefaults.standard
+        defaults.set(roundSwitch.isOn, forKey: TIP_SETTING_ROUNDING_ENABLED_KEY)
+        defaults.synchronize()
     }
     
     func calculateTip(billValue: Double) {
@@ -59,8 +72,10 @@ class ViewController: UIViewController {
         if (roundSwitch.isOn) {
             total = roundWithRoundingMethod(roundingMethod, value: total)
             tipValue = total - billValue
-            let roundTipPercent = tipValue / billValue
-            tipLabel.text = String(format: "Tip (%0.1f%%):", roundTipPercent * 100)
+            let roundTipPercent = (tipValue / billValue) * 100
+            
+            tipLabel.text = String(format: "Tip (%0.1f%%):", roundTipPercent.isNaN ? tipPercent * 100 : roundTipPercent)
+            
         } else {
             tipLabel.text = String(format: "Tip (%d%%):", Int(tipPercent * 100))
         }

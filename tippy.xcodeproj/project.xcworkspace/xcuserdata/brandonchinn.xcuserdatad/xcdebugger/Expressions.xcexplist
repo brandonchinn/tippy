@@ -6,7 +6,7 @@
          contextName = "ViewController.calculateTip(billValue : Double) -&gt; ():ViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tipPercent * 100">
+               value = "roundTipPercent == Double.Nan">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

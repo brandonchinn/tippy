@@ -14,6 +14,8 @@ let TIP_SETTING_GOOD_VALUE_KEY = "TipSettingGoodValue"
 let TIP_SETTING_OKAY_VALUE_KEY = "TipSettingOkayValue"
 let TIP_SETTING_ROUNDING_METHOD_KEY = "TipSettingRoundingMethod"
 
+let MIN_TIP_PERCENTAGE = 0
+
 enum TipPercentType: Int {
     case Okay = 0
     case Good = 1
@@ -109,6 +111,7 @@ class SettingsViewController: UIViewController {
             okayTipValue += offset
             // must be <= goodTipValue
             okayTipValue = min(okayTipValue, goodTipValue)
+            okayTipValue = max(okayTipValue, MIN_TIP_PERCENTAGE)
             updateLabel(label: okayTipValueLabel, value: okayTipValue)
         default:
             break

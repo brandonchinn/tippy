@@ -22,6 +22,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Instead of tip amounts, user selects service satisifaction level
+- [x] User can modify tip amounts
 - [x] Rounds total value to nearest dollar based on rounding method in settings
 - [x] Displays actual tip percentage for rounding
 

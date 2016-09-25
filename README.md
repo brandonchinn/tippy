@@ -37,6 +37,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Wanted to rename an IBAction method before submission, but no easy way to rename a method name without reconnecting to the UI
+
 Planning on making improvements after initial submission with animations and saving data
 
 

@@ -22,7 +22,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [x] Instead of tip amounts, user selects service satisifaction level
-- [x] User can modify tip amounts, but are restricted to not cross over bounding satisfaction levels
+- [x] User can modify tip amounts, but are restricted to not cross over bounding satisfaction levels (Excellent >= Good >= Okay) and between 0-100
 - [x] Rounds total value to nearest dollar based on rounding method in settings
 - [x] Displays actual tip percentage for rounding
 

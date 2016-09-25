@@ -12,6 +12,7 @@ let TIP_SETTING_DEFAULT_KEY = "TipSettingDefault"
 let TIP_SETTING_EXCELLENT_VALUE_KEY = "TipSettingExcellentValue"
 let TIP_SETTING_GOOD_VALUE_KEY = "TipSettingGoodValue"
 let TIP_SETTING_OKAY_VALUE_KEY = "TipSettingOkayValue"
+let TIP_SETTING_ROUNDING_METHOD_KEY = "TipSettingRoundingMethod"
 
 enum TipPercentType: Int {
     case Okay = 0
@@ -19,14 +20,19 @@ enum TipPercentType: Int {
     case Excellent = 2
 }
 
-class SettingsViewController: UIViewController {
-    
+enum RoundingMethod: Int {
+    case Nearest = 0
+    case Down = 1
+    case Up = 2
+}
 
+class SettingsViewController: UIViewController {
 
     @IBOutlet weak var excellentTipValueLabel: UILabel!
     @IBOutlet weak var goodTipValueLabel: UILabel!
     @IBOutlet weak var okayTipValueLabel: UILabel!
     @IBOutlet weak var defaultTipSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var roundingMethodSegmentedControl: UISegmentedControl!
     
     var excellentTipValue = 20
     var goodTipValue = 18
@@ -52,14 +58,16 @@ class SettingsViewController: UIViewController {
     
     func loadSettings() {
         let defaults = UserDefaults.standard
-        let defaultTipIndex = defaults.integer(forKey: TIP_SETTING_DEFAULT_KEY)
-        defaultTipSegmentedControl.selectedSegmentIndex = defaultTipIndex
+        
+        defaultTipSegmentedControl.selectedSegmentIndex = defaults.integer(forKey: TIP_SETTING_DEFAULT_KEY)
         
         excellentTipValue = defaults.object(forKey: TIP_SETTING_EXCELLENT_VALUE_KEY) as! Int? ?? excellentTipValue
         updateLabel(label: excellentTipValueLabel, value: excellentTipValue)
         goodTipValue = defaults.object(forKey: TIP_SETTING_GOOD_VALUE_KEY) as! Int? ?? goodTipValue
         updateLabel(label: goodTipValueLabel, value: goodTipValue)
         okayTipValue = defaults.object(forKey: TIP_SETTING_OKAY_VALUE_KEY) as! Int? ?? okayTipValue
+        
+        roundingMethodSegmentedControl.selectedSegmentIndex = defaults.integer(forKey: TIP_SETTING_ROUNDING_METHOD_KEY)
         updateLabel(label: okayTipValueLabel, value: okayTipValue)
     }
     
@@ -69,6 +77,7 @@ class SettingsViewController: UIViewController {
         defaults.set(excellentTipValue, forKey: TIP_SETTING_EXCELLENT_VALUE_KEY)
         defaults.set(goodTipValue, forKey: TIP_SETTING_GOOD_VALUE_KEY)
         defaults.set(okayTipValue, forKey: TIP_SETTING_OKAY_VALUE_KEY)
+        defaults.set(roundingMethodSegmentedControl.selectedSegmentIndex, forKey: TIP_SETTING_ROUNDING_METHOD_KEY)
         defaults.synchronize()
     }
     
